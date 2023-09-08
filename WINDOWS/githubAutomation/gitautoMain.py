@@ -2,13 +2,17 @@ import subprocess
 import os
 
 # Specify the directory path you want to check
-new_directory = input('your file directory :')
+
 
 # Check if the directory exists
-if os.path.exists(new_directory):
-    print(f"The directory '{new_directory}' exists.")
-else:
-    print(f"The directory '{new_directory}' does not exist.")
+while True:
+    new_directory = input('your file directory :')
+    if os.path.exists(new_directory):
+        print(f"The directory '{new_directory}' exists.")
+        break
+    else:
+        print(f"The directory '{new_directory}' does not exist.")
+        continue
 
 
 # Specify the path to the directory you want to change to for the subprocess
