@@ -95,8 +95,8 @@ class Main:
 
         else:
 
-            git_push = f"git push origin {self.mainBrunchOrAnother}"
-        return git_push
+            self.git_push = f"git push origin {self.mainBrunchOrAnother}"
+        return self.git_push
     # Push your local changes to a remote repository.
     def createNewBranch(self):
         self.NewBranchName = input("type the new branch name ")
