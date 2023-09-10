@@ -1,6 +1,6 @@
 import subprocess
 import os
-
+from colorama import Fore
 # Specify the directory path you want to check
 
 
@@ -81,6 +81,7 @@ class Main:
         # Create a tag to mark a specific commit (e.g., for releases).
 
     def git_commit(self):
+        
         self.commit_text = input ("enter the commit text :")
         self.git_commit = f'git commit -m "{self.commit_text}"'#message
         return self.git_commit
@@ -91,6 +92,7 @@ class Main:
         elif self.mainBrunchOrAnother == "mk_b":
 
                 self.statue_result = self.make_acommand(self.createNewBranch())
+                self.activate_the_new_branch = self.make_acommand(f"git push --set-upstream origin {self.NewBranchName}")
                 self.git_push = f"git push origin {self.mainBrunchOrAnother}"
 
         else:
@@ -123,7 +125,7 @@ class Main:
     # Change the working directory for the subprocess and run the command
     def makeCommand(self,command):
         try:
-            print(f"({command})")
+            print(f"running this command({Fore.LIGHTBLUE_EX}{command}{Fore.RESET})")
             result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, cwd=self.workingDirectory)
         except Exception as e:
             print(e)
@@ -133,15 +135,15 @@ class Main:
     def testCommandResult(self,result):
         try:
             if result.returncode == 0:
-                print("Command executed successfully")
+               
                 print("Output:")
-                print(result.stdout)
+                print(f"{Fore.LIGHTGREEN_EX}{result.stdout}{Fore.RESET}")
                 return True
 
             else:
-                print("Command failed")
+              
                 print("Error:")
-                print(result.stderr)
+                print(f"{Fore.LIGHTRED_EX}{result.stdout}{Fore.RESET}")
                 return False
         except Exception as e:
             print(e)
@@ -150,13 +152,17 @@ class Main:
     def move_To_next_or_stop(self,result,successOrfail):
     
             if successOrfail:
-                print(result.stdout)
+                
 
-                self.continueOrbreak = input("\nseccessful response \nfor continue(enter) stop(y) retry(r) restart(n):").lower()
+                self.continueOrbreak = input("\nfor continue(enter) stop(y) retry(r) restart(n)\nmake your own command(nw):").lower()
                 print(self.continueOrbreak)
 
                 if self.continueOrbreak == "y":
                     return 0
+                elif self.continueOrbreak == "nw":
+                    command = input("type the command:")
+                    result = self.makeCommand(command)
+                    return 1
                 elif self.continueOrbreak == "r":
                     return 3
                 elif self.continueOrbreak == "n":
@@ -170,9 +176,13 @@ class Main:
                 except:
                     print("there is no result to print")
 
-                self.continueOrbreak = input("\nfaild response \nnext(y) \nstop(enter) retry(r) restart(n):").lower()
+                self.continueOrbreak = input("\nfaild response \nnext(y) \nstop(enter) \nretry(r) \nrestart(n) \nmake your own command(nw):").lower()
                 if self.continueOrbreak == "y":
                     return 2 #continue any way
+                elif self.continueOrbreak == "nw":
+                    command = input("type the command:")
+                    result = self.makeCommand(command)
+                    return 1
                 elif self.continueOrbreak == "r":
                     return 3
                 elif self.continueOrbreak == "n":
@@ -247,11 +257,12 @@ class Main:
     def main(self):
         while True :
             whichProcessDoYouWant = input("update<enter> create<c>").lower()
+
+
             if whichProcessDoYouWant == "":
-                
                 self.makeUpdateToTheCode()
+
             elif whichProcessDoYouWant == "c":
-            
                 self.create_new_repo()
 
 
