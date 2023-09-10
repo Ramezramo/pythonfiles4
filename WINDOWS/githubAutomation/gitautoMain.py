@@ -5,7 +5,7 @@ from colorama import Fore
 
 
 # Check if the directory exists
-class Main:
+class Main:  
     def __init__(self):
             
         while True:
