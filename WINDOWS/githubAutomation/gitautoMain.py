@@ -172,7 +172,7 @@ class Main:
 
             else:
                 try:
-                    print(result.stdout)
+                    print("faild")
                 except:
                     print("there is no result to print")
 
