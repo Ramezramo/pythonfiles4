@@ -211,7 +211,7 @@ class Main:
                 return False
 
     def makeUpdateToTheCode(self):
-        while True :
+        while True : 
 
             statue_result = self.make_acommand(self.git_status)
             if statue_result :
