@@ -1,10 +1,9 @@
 import subprocess
 import os
 from colorama import Fore
-# Specify the directory path you want to check
 
 
-# Check if the directory exists
+
 class Main:
     def __init__(self):
             
@@ -19,11 +18,7 @@ class Main:
                 continue
 
 
-        # Specify the path to the directory you want to change to for the subprocess
-
-        # new_directory = 'F:\programming\dart_flutter\password_saver2'
-
-        # Specify the command you want to run
+ 
 
         self.git_init = "git init"
         # Initialize a new Git repository in your current directory.
